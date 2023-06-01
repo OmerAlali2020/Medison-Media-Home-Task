@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,12 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+    return redirect()->route('states.index');
+})->name('dashboard');
+
+Route::resource('states', StateController::class)
+->only(['index', 'store', 'edit', 'update'])
+->middleware('auth');
+
 
 require __DIR__.'/auth.php';
