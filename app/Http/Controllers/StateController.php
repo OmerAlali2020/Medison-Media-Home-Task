@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\State;
+use \App\Http\Requests\StoreStateRequest;
+use \App\Http\Requests\UpdateStateReques;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -37,13 +39,11 @@ class StateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    
-    public function store(Request $request): RedirectResponse
+
+
+    public function store(StoreStateRequest $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:20',
-            'iso' => 'required|string|max:5|regex:/^[A-Z]+$/',
-        ]);
+        $validated = $request->validated();
 
         $request->user()->states()->create($validated);
  
@@ -83,14 +83,11 @@ class StateController extends Controller
      * @param  \App\Models\State  $state
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, State $state): RedirectResponse
+    public function update(UpdateStateReques $request, State $state): RedirectResponse
     {
         $this->authorize('update', $state);
 
-        $validated = $request->validate([
-            'name' => 'required|string|max:20',
-            'iso' => 'required|string|max:5|regex:/^[A-Z]+$/',
-        ]);
+        $validated = $request->validated();
  
         $state->update($validated);
  

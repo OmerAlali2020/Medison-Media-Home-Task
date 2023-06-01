@@ -11,11 +11,13 @@
             <textarea
                 name="name"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                maxlength="30"
             >{{ old('name', $state->name) }}</textarea>
             <textarea
                 name="iso"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-            >{{ old('name', $state->iso) }}</textarea>
+                pattern="[A-Z]{2}"
+            >{{ old('iso', $state->iso) }}</textarea>
             <div class="mt-4 space-x-2">
             <x-button>{{ __('Save') }}</x-button>
                 <a href="{{ route('states.index') }}">{{ __('Cancel') }}</a>

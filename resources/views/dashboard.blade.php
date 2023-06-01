@@ -21,7 +21,7 @@
 
                 <div class="form-group">
                     <label for="name">Name:</label>
-                    <input type="text" name="name" id="name" class="form-control" required>
+                    <input type="text" name="name" id="name" class="form-control" maxlength="30" required>
                 </div>
 
                 <div class="form-group">
