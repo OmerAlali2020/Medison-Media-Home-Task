@@ -49,18 +49,21 @@
             <th class="border px-4 py-2">Actions</th>
         </tr>
     </thead>
+    
     <tbody>
         @foreach ($states as $state)
-            <tr>
-                <td class="border px-4 py-2">{{ $state->id }}</td>
-                <td class="border px-4 py-2">{{ $state->name }}</td>
-                <td class="border px-4 py-2">{{ $state->iso }}</td>
-                <td class="border px-4 py-2">
-                <x-dropdown-link :href="route('states.edit', $state)">
-                                            {{ __('Edit') }}
-                                        </x-dropdown-link>
-                </td>
-            </tr>
+            @if ($state->user->is(auth()->user()))
+                <tr>
+                    <td class="border px-4 py-2">{{ $state->id }}</td>
+                    <td class="border px-4 py-2">{{ $state->name }}</td>
+                    <td class="border px-4 py-2">{{ $state->iso }}</td>
+                    <td class="border px-4 py-2">
+                    <x-dropdown-link :href="route('states.edit', $state)">
+                                                {{ __('Edit') }}
+                                            </x-dropdown-link>
+                    </td>
+                </tr>
+            @endif
         @endforeach
     </tbody>
 </table>
