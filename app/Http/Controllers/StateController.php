@@ -69,6 +69,7 @@ class StateController extends Controller
      */
     public function edit(State $state): View
     {
+        $this->authorize('update', $state);
 
         return view('edit', [
             'state' => $state,
@@ -84,7 +85,8 @@ class StateController extends Controller
      */
     public function update(Request $request, State $state): RedirectResponse
     {
- 
+        $this->authorize('update', $state);
+
         $validated = $request->validate([
             'name' => 'required|string|max:20',
             'iso' => 'required|string|max:5|regex:/^[A-Z]+$/',
