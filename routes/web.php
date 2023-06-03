@@ -14,17 +14,19 @@ use App\Http\Controllers\StateController;
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('dashboard');
+Route::middleware(['blockIP'])->group(function () {
+    
+    Route::get('/', function () {
+        return redirect()->route('dashboard');
+    });
+    
+    Route::get('/dashboard', function () {
+        return redirect()->route('states.index');
+    })->name('dashboard');
+    
+    Route::resource('states', StateController::class)
+    ->only(['index', 'store', 'edit', 'update'])
+    ->middleware('auth');
 });
-
-Route::get('/dashboard', function () {
-    return redirect()->route('states.index');
-})->name('dashboard');
-
-Route::resource('states', StateController::class)
-->only(['index', 'store', 'edit', 'update'])
-->middleware('auth');
-
 
 require __DIR__.'/auth.php';
