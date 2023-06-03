@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class BlockIp
 {
-    public $blockIps = [];
 
     /**
      * Handle an incoming request.
@@ -18,8 +17,11 @@ class BlockIp
      */
     public function handle(Request $request, Closure $next)
     {
-        if (in_array($request->ip(), $this->blockIps)) {
-            abort(403, "You are restricted to access the site.");
+        $userIp = request()->ip();
+        $userCountry = geoip()->getLocation($userIp)->country;
+
+        if ($userCountry !== 'Israel') {
+            abort(403, "You are restricted to access the site from {$userCountry}.");
         }
   
         return $next($request);

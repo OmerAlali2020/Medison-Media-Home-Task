@@ -15,7 +15,7 @@ use App\Http\Controllers\StateController;
 */
 
 Route::middleware(['blockIP'])->group(function () {
-    
+
     Route::get('/', function () {
         return redirect()->route('dashboard');
     });
