@@ -1,4 +1,5 @@
 <x-app-layout>
+    
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
@@ -6,31 +7,36 @@
     </x-slot>
 
     <div class="py-12">
+
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     You're logged in!
                 </div>
-            <div class="container">
-            
-            <h1>Add New Country</h1>
 
-            <form method="POST" action="{{ route('states.store') }}">
 
-                @csrf
+                <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+                        
+                    <h1>Add New Country</h1>
 
-                <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" name="name" id="name" class="form-control" maxlength="30" required>
+                        <form method="POST" action="{{ route('states.store') }}">
+
+                        @csrf
+
+                        <div class="form-group">
+                            <x-label for="name">Name</x-label>
+                            <x-input type="text" name="name" id="name" class="block mt-1 w-full" maxlength="30" required autofocus />
                 </div>
 
                 <div class="form-group">
-                    <label for="iso">ISO:</label>
-                    <input type="text" name="iso" id="iso" class="form-control" pattern="[A-Z]{2}" required>
+                    <x-label for="iso">ISO</x-label>
+                    <x-input type="text" name="iso" id="iso" class="block mt-1 w-full" pattern="[A-Z]{2}" required autofocus />
                 </div>
 
-                <button type="submit" class="btn btn-primary">Save</button>
-            </form>
+                <x-button class="ml-3">
+                    {{ __('Save') }}
+                </x-button>
+              </form>
         </div>
 
         <div class="py-12">
