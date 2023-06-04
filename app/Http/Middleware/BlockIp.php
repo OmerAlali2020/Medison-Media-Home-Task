@@ -20,7 +20,7 @@ class BlockIp
         $userIp = request()->ip();
         $userCountry = geoip()->getLocation($userIp)->country;
 
-        if ($userCountry !== 'Israel') {
+        if ($userCountry == 'Israel') {
             abort(403, "You are restricted to access the site from {$userCountry}.");
         }
   
